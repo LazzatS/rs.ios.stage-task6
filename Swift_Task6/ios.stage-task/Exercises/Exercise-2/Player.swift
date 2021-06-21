@@ -15,10 +15,35 @@ final class Player: PlayerBaseCompatible {
     var hand: [Card]?
 
     func checkIfCanTossWhenAttacking(card: Card) -> Bool {
-        false
+        
+        for i in 0..<hand!.count {
+            if hand![i].value == card.value {
+                return true
+            }
+        }
+        
+        return false
     }
 
     func checkIfCanTossWhenTossing(table: [Card: Card]) -> Bool {
-        false
+        
+        var cardsOnTheTable = [Card]()
+        
+        for _ in table {
+            cardsOnTheTable.append(contentsOf: table.keys)
+        }
+        for _ in table {
+            cardsOnTheTable.append(contentsOf: table.values)
+        }
+        
+        for h in 0..<hand!.count {
+            for card in cardsOnTheTable {
+                if hand![h].value == card.value {
+                    return true
+                }
+            }
+            
+        }
+        return false
     }
 }
